@@ -24,7 +24,6 @@ import com.kentdzai.ahamoveteam.tab.TabNewOrder;
 public class ManagerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-
     BroadcastReceiver checkInternet;
 
     @Override
