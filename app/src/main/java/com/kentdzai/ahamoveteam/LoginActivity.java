@@ -11,6 +11,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
@@ -81,27 +82,32 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     void login(final String user, final String pass) {
         Ion.with(getApplicationContext())
+                .load("http://kentdzai.tk/aha/login.php")
 //                .load("http://192.168.1.102/php/aha/login.php")
-                .load("http://kentdzai.tk/ahalogin/login.php")
                 .setBodyParameter("username", user)
                 .setBodyParameter("password", pass)
-                .asString().setCallback(new FutureCallback<String>() {
+                .asJsonObject().setCallback(new FutureCallback<JsonObject>() {
             @Override
-            public void onCompleted(Exception e, String result) {
-                if (result.trim().equals("true")) {
+            public void onCompleted(Exception e, JsonObject rr) {
+                String result = rr.get("result").getAsString();
+                if (result.trim().equals("success")) {
                     if (saveLogin.isChecked()) {
                         edit.putBoolean("logined", true);
                     } else {
                         edit.putBoolean("logined", false);
                     }
-                    edit.putString("usernam", user);
+                    edit.putString("username", user);
                     edit.putString("password", pass);
+                    edit.putString("maNhanVien", rr.get("maNhanVien").getAsString());
+                    edit.putString("tenNhanVien", rr.get("tenNhanVien").getAsString());
+                    edit.putString("diaChiNV", rr.get("diaChiNV").getAsString());
+                    edit.putString("soDienThoaiNV", rr.get("soDienThoaiNV").getAsString());
                     edit.commit();
                     startActivity(new Intent(LoginActivity.this, ManagerActivity.class));
                 } else if (result.trim().equals("wrongusername")) {
                     etUsername.setError("Sai tên đẳng nhập");
                     etUsername.requestFocus();
-                } else if (result.trim().equals("false")) {
+                } else if (result.trim().equals("failure")) {
                     etPassword.setError("Sai mật khẩu");
                     etPassword.requestFocus();
                 }

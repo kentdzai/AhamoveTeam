@@ -6,15 +6,17 @@ package com.kentdzai.ahamoveteam.model;
 
 public class SanPham {
     int maSanPham;
-    String tenSanPham, giaSanPham, moTa;
+    String tenSanPham;
+    int giaSanPham;
     int maLoai;
+    String moTa;
 
-    public SanPham(int maSanPham, String tenSanPham, String giaSanPham, String moTa, int maLoai) {
+    public SanPham(int maSanPham, String tenSanPham, int giaSanPham, int maLoai, String moTa) {
         this.maSanPham = maSanPham;
         this.tenSanPham = tenSanPham;
         this.giaSanPham = giaSanPham;
-        this.moTa = moTa;
         this.maLoai = maLoai;
+        this.moTa = moTa;
     }
 
     public int getMaSanPham() {
@@ -33,20 +35,12 @@ public class SanPham {
         this.tenSanPham = tenSanPham;
     }
 
-    public String getGiaSanPham() {
+    public int getGiaSanPham() {
         return giaSanPham;
     }
 
-    public void setGiaSanPham(String giaSanPham) {
+    public void setGiaSanPham(int giaSanPham) {
         this.giaSanPham = giaSanPham;
-    }
-
-    public String getMoTa() {
-        return moTa;
-    }
-
-    public void setMoTa(String moTa) {
-        this.moTa = moTa;
     }
 
     public int getMaLoai() {
@@ -55,5 +49,13 @@ public class SanPham {
 
     public void setMaLoai(int maLoai) {
         this.maLoai = maLoai;
+    }
+
+    public String getMoTa() {
+        return moTa;
+    }
+
+    public void setMoTa(String moTa) {
+        this.moTa = moTa;
     }
 }

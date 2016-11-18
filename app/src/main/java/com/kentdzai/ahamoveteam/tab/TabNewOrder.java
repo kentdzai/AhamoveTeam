@@ -1,6 +1,8 @@
 package com.kentdzai.ahamoveteam.tab;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,32 +15,26 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.kentdzai.ahamoveteam.MyLog;
 import com.kentdzai.ahamoveteam.R;
 import com.kentdzai.ahamoveteam.model.DatabaseSanPham;
 import com.kentdzai.ahamoveteam.model.LoaiSanPham;
 import com.kentdzai.ahamoveteam.model.SanPham;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
 
 import java.util.ArrayList;
 
 public class TabNewOrder extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    private String mParam1;
-    private String mParam2;
-
-    private OnFragmentInteractionListener mListener;
 
     public TabNewOrder() {
     }
 
     public static TabNewOrder newInstance(String param1, String param2) {
         TabNewOrder fragment = new TabNewOrder();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
         return fragment;
     }
 
@@ -46,10 +42,6 @@ public class TabNewOrder extends Fragment implements View.OnClickListener, Adapt
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     DatabaseSanPham db;
@@ -62,6 +54,8 @@ public class TabNewOrder extends Fragment implements View.OnClickListener, Adapt
 
     EditText etTenKhachHang, etSoDienThoai, etDiaChi, etSoLuong;
     Button btnPlus, btnMinus, btnPost;
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -74,6 +68,7 @@ public class TabNewOrder extends Fragment implements View.OnClickListener, Adapt
     }
 
     public void init(View v) {
+        preferences = getContext().getSharedPreferences("Login", Context.MODE_PRIVATE);
         spLoaiSP = (Spinner) v.findViewById(R.id.spLoaiSP);
         spSanPham = (Spinner) v.findViewById(R.id.spSanPham);
 
@@ -137,18 +132,44 @@ public class TabNewOrder extends Fragment implements View.OnClickListener, Adapt
                     etTenKhachHang.setError("Tên khách hàng không được để trống!");
                     return;
                 } else {
-                    alert(ten, sdt, address, arrSP.get(posSP).getMaSanPham(), Integer.parseInt(soLuong), arrSP.get(posSP).getTenSanPham());
+                    String manv = preferences.getString("maNhanVien", "");
+                    alert(ten, sdt, address, arrSP.get(posSP).getMaSanPham(), Integer.parseInt(soLuong), arrSP.get(posSP).getTenSanPham(), arrSP.get(posSP).getGiaSanPham(), manv);
                 }
                 break;
         }
     }
 
-    public void alert(String ten, String sdt, String diaChi, int maSP, int soLuong, String tenSP) {
+    public void alert(final String ten, final String sdt, final String diaChi, final int maSP, final int soLuong, String tenSP, final int gia, final String manv) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setNegativeButton("Xác Nhận", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                int tongtien = soLuong * gia;
+                Ion.with(getContext())
+                        .load("http://kentdzai.tk/aha/pushdonhang.php")
+//                        .load("http://192.168.1.102/php/aha/pushdonhang.php")
+                        .setBodyParameter("tenKH", ten)
+                        .setBodyParameter("sdtKH", sdt)
+                        .setBodyParameter("diaChiKH", diaChi)
+                        .setBodyParameter("maNV", manv)
+                        .setBodyParameter("maSP", String.valueOf(maSP))
+                        .setBodyParameter("soLuong", String.valueOf(soLuong))
+                        .setBodyParameter("tongTien", String.valueOf(tongtien))
+                        .asString().setCallback(new FutureCallback<String>() {
+                    @Override
+                    public void onCompleted(Exception e, String result) {
+                        if (result.equals("true")) {
+                            Toast.makeText(getContext(), "Thành công!" + result, Toast.LENGTH_SHORT).show();
+                            etDiaChi.setText("");
+                            etTenKhachHang.setText("");
+                            etSoDienThoai.setText("");
+                            etTenKhachHang.requestFocus();
+                        } else if (result.equals("false")) {
+                            Toast.makeText(getContext(), "Thất bại!" + result, Toast.LENGTH_SHORT).show();
+                        }
 
+                    }
+                });
             }
         });
         builder.setPositiveButton("Hủy", null);
@@ -157,7 +178,8 @@ public class TabNewOrder extends Fragment implements View.OnClickListener, Adapt
                 + "SĐT: " + sdt + "\n"
                 + "Địa Chỉ: " + diaChi + "\n"
                 + "SP: " + tenSP + "\n"
-                + "Số Lượng: " + soLuong);
+                + "Số Lượng: " + soLuong + "\n"
+                + "Tổng tiền: " + gia * soLuong);
         builder.show();
     }
 
@@ -183,16 +205,12 @@ public class TabNewOrder extends Fragment implements View.OnClickListener, Adapt
 
 
     public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
     }
 
 
@@ -211,10 +229,5 @@ public class TabNewOrder extends Fragment implements View.OnClickListener, Adapt
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
-    }
-
-
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
     }
 }

@@ -21,6 +21,7 @@ import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
 
 import com.kentdzai.ahamoveteam.tab.TabNewOrder;
+import com.kentdzai.ahamoveteam.tab.TabProductList;
 
 public class ManagerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -77,21 +78,12 @@ public class ManagerActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
         Fragment fragment = null;
-        if (id == R.id.nav_newOrder) {
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        }
-
-
         switch (item.getItemId()) {
             case R.id.nav_newOrder:
                 fragment = new TabNewOrder();
+                break;
+            case R.id.nav_listProduct:
+                fragment = new TabProductList();
                 break;
             case R.id.nav_logout:
                 SharedPreferences preferences = getSharedPreferences("Login", MODE_PRIVATE);
@@ -100,9 +92,7 @@ public class ManagerActivity extends AppCompatActivity
                 edit.commit();
                 startActivity(new Intent(ManagerActivity.this, LoginActivity.class));
                 break;
-//            case R.id.nav_search_id:
-//                fragment = new TabSeachID();
-//                break;
+
 //            case R.id.nav_mark:
 //                fragment = new TabMark();
 //                break;
