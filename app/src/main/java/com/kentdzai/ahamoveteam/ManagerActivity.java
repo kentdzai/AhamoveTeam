@@ -2,6 +2,7 @@ package com.kentdzai.ahamoveteam;
 
 import android.content.BroadcastReceiver;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -40,6 +41,7 @@ public class ManagerActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setCheckedItem(R.id.nav_newOrder);
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction().replace(R.id.main, new TabNewOrder()).commit();
     }
@@ -84,14 +86,19 @@ public class ManagerActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
-
         }
 
 
         switch (item.getItemId()) {
             case R.id.nav_newOrder:
                 fragment = new TabNewOrder();
+                break;
+            case R.id.nav_logout:
+                SharedPreferences preferences = getSharedPreferences("Login", MODE_PRIVATE);
+                SharedPreferences.Editor edit = preferences.edit();
+                edit.clear();
+                edit.commit();
+                startActivity(new Intent(ManagerActivity.this, LoginActivity.class));
                 break;
 //            case R.id.nav_search_id:
 //                fragment = new TabSeachID();
