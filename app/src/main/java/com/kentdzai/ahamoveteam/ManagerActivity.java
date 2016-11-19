@@ -21,6 +21,7 @@ import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
 
 import com.kentdzai.ahamoveteam.tab.TabNewOrder;
+import com.kentdzai.ahamoveteam.tab.TabOrderList;
 import com.kentdzai.ahamoveteam.tab.TabProductList;
 
 public class ManagerActivity extends AppCompatActivity
@@ -84,6 +85,9 @@ public class ManagerActivity extends AppCompatActivity
                 break;
             case R.id.nav_listProduct:
                 fragment = new TabProductList();
+                break;
+            case R.id.nav_orderList:
+                fragment = new TabOrderList();
                 break;
             case R.id.nav_logout:
                 SharedPreferences preferences = getSharedPreferences("Login", MODE_PRIVATE);

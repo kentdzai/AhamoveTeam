@@ -5,5 +5,57 @@ package com.kentdzai.ahamoveteam.model;
  */
 
 public class HoaDon {
-//    String maHoaDon, maKhachHang,
+    int maHoaDon;
+    String tenKhachHang;
+    String sdtKhachHang;
+    int soLuong;
+    int tongTien;
+
+    public HoaDon(int maHoaDon, String tenKhachHang, String sdtKhachHang, int soLuong, int tongTien) {
+        this.maHoaDon = maHoaDon;
+        this.tenKhachHang = tenKhachHang;
+        this.sdtKhachHang = sdtKhachHang;
+        this.soLuong = soLuong;
+        this.tongTien = tongTien;
+    }
+
+    public String getSdtKhachHang() {
+        return sdtKhachHang;
+    }
+
+    public void setSdtKhachHang(String sdtKhachHang) {
+        this.sdtKhachHang = sdtKhachHang;
+    }
+
+    public int getMaHoaDon() {
+        return maHoaDon;
+    }
+
+    public void setMaHoaDon(int maHoaDon) {
+        this.maHoaDon = maHoaDon;
+    }
+
+    public String getTenKhachHang() {
+        return tenKhachHang;
+    }
+
+    public void setTenKhachHang(String tenKhachHang) {
+        this.tenKhachHang = tenKhachHang;
+    }
+
+    public int getSoLuong() {
+        return soLuong;
+    }
+
+    public void setSoLuong(int soLuong) {
+        this.soLuong = soLuong;
+    }
+
+    public int getTongTien() {
+        return tongTien;
+    }
+
+    public void setTongTien(int tongTien) {
+        this.tongTien = tongTien;
+    }
 }

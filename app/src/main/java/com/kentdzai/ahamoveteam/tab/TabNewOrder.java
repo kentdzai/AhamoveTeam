@@ -88,7 +88,10 @@ public class TabNewOrder extends Fragment implements View.OnClickListener, Adapt
         spLoaiSP.setOnItemSelectedListener(this);
         spSanPham.setOnItemSelectedListener(this);
         setTenLoai();
-        setTenSP(arrLoaiSanPham.get(0).getMaLoai());
+        if (arrLoaiSanPham.size() > 0) {
+            setTenSP(arrLoaiSanPham.get(0).getMaLoai());
+        }
+
     }
 
     public boolean checkValid(String s) {

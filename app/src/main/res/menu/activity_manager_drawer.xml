@@ -11,9 +11,9 @@
             android:icon="@drawable/ic_menu_gallery"
             android:title="Danh Sách Sản Phẩm" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_orderList"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:title="Danh Sách Đơn Hàng" />
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"

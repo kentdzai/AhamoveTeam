@@ -29,8 +29,16 @@ public class DatabaseSanPham extends SQLiteOpenHelper {
     public final String MOTA = "MOTA";
     public final String FK_MA_LOAI = "FK_MA_LOAI";
 
+    public final String TBL_HOADON = "TBL_HOADON";
+    public final String MAHD = "MAHD";
+    public final String TENKH = "TENKH";
+    public final String SDTKH = "SDTKH";
+    public final String SOLUONGMAY = "SOLUONGMAY";
+    public final String TONGTIEN = "TONGTIEN";
+
+
     public DatabaseSanPham(Context context) {
-        super(context, "dbSanPham6" + ".db", null, 1);
+        super(context, "dbSanPham8" + ".db", null, 1);
     }
 
 
@@ -39,6 +47,7 @@ public class DatabaseSanPham extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE TBL_LOAISANPHAM(MA_LOAI INTEGER PRIMARY KEY, TEN_LOAI TEXT)");
         db.execSQL("CREATE TABLE TBL_SANPHAM(MASANPHAM INTEGER PRIMARY KEY, TENSANPHAM TEXT" +
                 ", GIASANPHAM INTEGER, FK_MA_LOAI INTEGER, MOTA TEXT)");
+        db.execSQL("CREATE TABLE TBL_HOADON(MAHD INTEGER PRIMARY KEY, TENKH TEX, SDTKH TEXT, SOLUONGMAY INTEGER, TONGTIEN INTEGER)");
         infoDefault(db);
     }
 
@@ -46,6 +55,10 @@ public class DatabaseSanPham extends SQLiteOpenHelper {
         db = getWritableDatabase();
         db.execSQL("delete from " + TBL_LOAISANPHAM);
         db.execSQL("delete from " + TBL_SANPHAM);
+    }
+    public void clearHD() {
+        db = getWritableDatabase();
+        db.execSQL("delete from " + TBL_HOADON);
     }
 
 
@@ -85,6 +98,21 @@ public class DatabaseSanPham extends SQLiteOpenHelper {
         return false;
     }
 
+    public boolean insertHoaDon(HoaDon h) {
+        db = getWritableDatabase();
+        values = new ContentValues();
+        values.put(MAHD, h.getMaHoaDon());
+        values.put(TENKH, h.getTenKhachHang());
+        values.put(SDTKH, h.getSdtKhachHang());
+        values.put(SOLUONGMAY, h.getSoLuong());
+        values.put(TONGTIEN, h.getTongTien());
+        long result = db.insert(TBL_SANPHAM, null, values);
+        if (result != -1) {
+            return true;
+        }
+        return false;
+    }
+
 
     public ArrayList<LoaiSanPham> querryLoaiSanPham() {
         db = getReadableDatabase();
@@ -108,6 +136,15 @@ public class DatabaseSanPham extends SQLiteOpenHelper {
         return arrSP;
     }
 
+    public ArrayList<HoaDon> queryHoaDon() {
+        db = getReadableDatabase();
+        ArrayList<HoaDon> arrH = new ArrayList<>();
+        Cursor c = db.query(TBL_HOADON, null, null, null, null, null, null);
+        while (c.moveToNext()) {
+            arrH.add(new HoaDon(c.getInt(0), c.getString(1), c.getString(2), c.getInt(3), c.getInt(4)));
+        }
+        return arrH;
+    }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
