@@ -59,8 +59,8 @@ public class TabOrderList extends Fragment {
     public void getData() {
         db.clearHD();
         Ion.with(getContext())
-//                .load("http://192.168.1.102/php/aha/selectordeletehoadon.php")
-                .load("http://kentdzai.tk/aha/selectordeletehoadon.php")
+                .load("http://192.168.1.102/php/aha/selectordeletehoadon.php")
+//                .load("http://kentdzai.tk/aha/selectordeletehoadon.php")
                 .setBodyParameter("keytask", "gethoadon")
                 .asJsonArray()
                 .setCallback(new FutureCallback<JsonArray>() {
@@ -75,7 +75,8 @@ public class TabOrderList extends Fragment {
                                         , j.get("soLuong").getAsInt()
                                         , j.get("tongTien").getAsInt()
                                 ));
-                                adapter.notifyDataSetChanged();;
+                                adapter.notifyDataSetChanged();
+                                ;
 //                                db.insertHoaDon(new HoaDon(j.get("maHoaDon").getAsInt()
 //                                        , j.get("tenKhachHang").getAsString() + ""
 //                                        , j.get("soDienThoaiKH").getAsString() + ""

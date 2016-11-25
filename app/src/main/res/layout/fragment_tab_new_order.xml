@@ -10,74 +10,95 @@
         android:orientation="vertical"
         android:padding="7dp">
 
-
-        <EditText
-            android:id="@+id/etTenKhachHang"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Tên Khách Hàng"
-            android:inputType="text" />
+            android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/etSoDienThoai"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Số Điện Thoại"
-            android:inputType="phone" />
 
-        <EditText
-            android:id="@+id/etDiaChi"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Địa Chỉ"
-            android:inputType="text" />
+            <AutoCompleteTextView
+                android:id="@+id/acPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Số Điện Thoại"
+                android:inputType="number"
+                android:maxLength="11"
+                android:maxLines="1" />
 
-        <Spinner
-            android:id="@+id/spLoaiSP"
-            android:layout_width="match_parent"
-            android:layout_height="25dp" />
+        </android.support.design.widget.TextInputLayout>
 
-        <Spinner
-            android:id="@+id/spSanPham"
-            android:layout_width="match_parent"
-            android:layout_height="25dp" />
-
-        <LinearLayout
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/etSoLuong"
-                android:layout_width="0dp"
+                android:id="@+id/etTenKhachHang"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="6"
-                android:enabled="false"
-                android:hint="Số Lượng"
-                android:inputType="number"
-                android:text="1" />
+                android:hint="Tên Khách Hàng"
+                android:inputType="text" />
+        </android.support.design.widget.TextInputLayout>
 
-            <Button
-                android:id="@+id/btnMinus"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:text="-" />
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            <Button
-                android:id="@+id/btnPlus"
-                android:layout_width="0dp"
+            <EditText
+                android:id="@+id/etDiaChi"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:text="+" />
+                android:hint="Địa Chỉ"
+                android:inputType="text" />
+        </android.support.design.widget.TextInputLayout>
+
+        <Spinner
+            android:id="@+id/spLoaiSP"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:visibility="gone" />
+
+        <Spinner
+            android:id="@+id/spSanPham"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:visibility="gone" />
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <AutoCompleteTextView
+                android:id="@+id/acSanPham"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Tên Sản Phẩm" />
+        </android.support.design.widget.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
 
         </LinearLayout>
 
         <Button
-            android:id="@+id/btnPost"
+            android:id="@+id/btnAdd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Đăng" />
+            android:text="Thêm" />
 
+        <ListView
+            android:id="@+id/lvDetail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_sent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@mipmap/ic_sent" />
 
 </FrameLayout>

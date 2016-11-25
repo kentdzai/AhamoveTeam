@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.kentdzai.ahamoveteam.MyLog;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -56,6 +57,7 @@ public class DatabaseSanPham extends SQLiteOpenHelper {
         db.execSQL("delete from " + TBL_LOAISANPHAM);
         db.execSQL("delete from " + TBL_SANPHAM);
     }
+
     public void clearHD() {
         db = getWritableDatabase();
         db.execSQL("delete from " + TBL_HOADON);
@@ -123,6 +125,16 @@ public class DatabaseSanPham extends SQLiteOpenHelper {
             arrL.add(new LoaiSanPham(c.getInt(c.getColumnIndex(MA_LOAI)), c.getString(c.getColumnIndex(TEN_LOAI))));
         }
         return arrL;
+    }
+
+    public ArrayList<SanPham> queryAllSanPham() {
+        db = getReadableDatabase();
+        ArrayList<SanPham> arrSP = new ArrayList<>();
+        Cursor c = db.query(TBL_SANPHAM, null, null, null, null, null, null);
+        while (c.moveToNext()) {
+            arrSP.add(new SanPham(c.getInt(0), c.getString(1), c.getInt(2), c.getInt(3), c.getString(4)));
+        }
+        return arrSP;
     }
 
 

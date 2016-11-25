@@ -82,8 +82,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     void login(final String user, final String pass) {
         Ion.with(getApplicationContext())
-                .load("http://kentdzai.tk/aha/login.php")
-//                .load("http://192.168.1.102/php/aha/login.php")
+//                .load("http://kentdzai.tk/aha/login.php")
+                .load("http://192.168.1.102/php/aha/login.php")
                 .setBodyParameter("username", user)
                 .setBodyParameter("password", pass)
                 .asJsonObject().setCallback(new FutureCallback<JsonObject>() {

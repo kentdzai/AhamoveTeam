@@ -1,23 +1,24 @@
 package com.kentdzai.ahamoveteam.model;
 
 /**
- * Created by kentd on 17/11/2016.
+ * Created by kentd on 23/11/2016.
  */
 
-public class SanPham {
+public class ChitietHoaDon {
     int maSanPham;
     String tenSanPham;
-    int giaSanPham;
+    String giaSanPham;
     int maLoai;
-    String moTa;
+    int soLuong;
 
-    public SanPham(int maSanPham, String tenSanPham, int giaSanPham, int maLoai, String moTa) {
+    public ChitietHoaDon(int maSanPham, String tenSanPham, String giaSanPham, int maLoai, int soLuong) {
         this.maSanPham = maSanPham;
         this.tenSanPham = tenSanPham;
         this.giaSanPham = giaSanPham;
         this.maLoai = maLoai;
-        this.moTa = moTa;
+        this.soLuong = soLuong;
     }
+
 
     public int getMaSanPham() {
         return maSanPham;
@@ -35,11 +36,11 @@ public class SanPham {
         this.tenSanPham = tenSanPham;
     }
 
-    public int getGiaSanPham() {
+    public String getGiaSanPham() {
         return giaSanPham;
     }
 
-    public void setGiaSanPham(int giaSanPham) {
+    public void setGiaSanPham(String giaSanPham) {
         this.giaSanPham = giaSanPham;
     }
 
@@ -51,22 +52,22 @@ public class SanPham {
         this.maLoai = maLoai;
     }
 
-    public String getMoTa() {
-        return moTa;
+    public int getSoLuong() {
+        return soLuong;
     }
 
-    public void setMoTa(String moTa) {
-        this.moTa = moTa;
+    public void setSoLuong(int soLuong) {
+        this.soLuong = soLuong;
     }
 
     @Override
     public String toString() {
-        return "SanPham{" +
+        return "ChitietHoaDon{" +
                 "maSanPham=" + maSanPham +
                 ", tenSanPham='" + tenSanPham + '\'' +
-                ", giaSanPham=" + giaSanPham +
+                ", giaSanPham='" + giaSanPham + '\'' +
                 ", maLoai=" + maLoai +
-                ", moTa='" + moTa + '\'' +
+                ", soLuong=" + soLuong +
                 '}';
     }
 }
