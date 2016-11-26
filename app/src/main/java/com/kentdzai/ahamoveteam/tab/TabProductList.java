@@ -50,11 +50,13 @@ public class TabProductList extends Fragment implements AdapterView.OnItemSelect
     AdapterSanPham adapter;
     ArrayList<LoaiSanPham> arrLoaiSanPham;
     ArrayList<SanPham> arrSanPham;
+    String server;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_tab_product_list, container, false);
+        server = getResources().getString(R.string.server);
         init(v);
         return v;
     }
@@ -86,7 +88,7 @@ public class TabProductList extends Fragment implements AdapterView.OnItemSelect
 
     public void getData() {
         db.clearDbToUpdate();
-        Ion.with(getContext()).load("http://192.168.1.102/php/aha/getmaloai.php")
+        Ion.with(getContext()).load(server + "getmaloai.php")
                 .setBodyParameter("anhdeptrai", "kentdzai")
                 .asJsonArray()
                 .setCallback(new FutureCallback<JsonArray>() {
@@ -95,7 +97,7 @@ public class TabProductList extends Fragment implements AdapterView.OnItemSelect
                         for (int i = 0; i < result.size(); i++) {
                             JsonObject jj = result.get(i).getAsJsonObject();
                             db.insertLoaiSanPham(jj.get("maLoai").getAsInt(), jj.get("tenLoai").getAsString());
-                            Ion.with(getContext()).load("http://192.168.1.102/php/aha/getsanpham.php")
+                            Ion.with(getContext()).load(server + "getsanpham.php")
                                     .setBodyParameter("anhdeptrai", "kentdzai")
                                     .asJsonArray()
                                     .setCallback(new FutureCallback<JsonArray>() {
@@ -122,8 +124,8 @@ public class TabProductList extends Fragment implements AdapterView.OnItemSelect
     public void getData2() {
         db.clearDbToUpdate();
         Ion.with(getContext())
-                .load("http://kentdzai.tk/aha/getmaloaiandsanpham.php")
-//                .load("http://192.168.1.102/php/aha/getmaloaiandsanpham.php")
+//                .load("http://kentdzai.tk/aha/getmaloaiandsanpham.php")
+                .load(server + "getmaloaiandsanpham.php")
                 .setBodyParameter("anhdeptrai", "kentdzai")
                 .asJsonArray()
                 .setCallback(new FutureCallback<JsonArray>() {

@@ -8,8 +8,26 @@ public class HoaDon {
     int maHoaDon;
     String tenKhachHang;
     String sdtKhachHang;
+    String tenMay;
     int soLuong;
     int tongTien;
+
+    public HoaDon(int maHoaDon, String tenKhachHang, String sdtKhachHang, String tenMay, int soLuong, int tongTien) {
+        this.maHoaDon = maHoaDon;
+        this.tenKhachHang = tenKhachHang;
+        this.sdtKhachHang = sdtKhachHang;
+        this.tenMay = tenMay;
+        this.soLuong = soLuong;
+        this.tongTien = tongTien;
+    }
+
+    public String getTenMay() {
+        return tenMay;
+    }
+
+    public void setTenMay(String tenMay) {
+        this.tenMay = tenMay;
+    }
 
     public HoaDon(int maHoaDon, String tenKhachHang, String sdtKhachHang, int soLuong, int tongTien) {
         this.maHoaDon = maHoaDon;
@@ -17,6 +35,8 @@ public class HoaDon {
         this.sdtKhachHang = sdtKhachHang;
         this.soLuong = soLuong;
         this.tongTien = tongTien;
+
+
     }
 
     public String getSdtKhachHang() {

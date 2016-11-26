@@ -115,6 +115,16 @@ public class DatabaseSanPham extends SQLiteOpenHelper {
         return false;
     }
 
+    public String getTenSanPham(String maSP) {
+        db = getReadableDatabase();
+        Cursor c = db.query(TBL_SANPHAM, new String[]{TENSANPHAM}, MASANPHAM + " = ?", new String[]{String.valueOf(maSP)}, null, null, null);
+        if (c != null) {
+            c.moveToFirst();
+            return c.getString(0);
+        }
+
+        return "";
+    }
 
     public ArrayList<LoaiSanPham> querryLoaiSanPham() {
         db = getReadableDatabase();

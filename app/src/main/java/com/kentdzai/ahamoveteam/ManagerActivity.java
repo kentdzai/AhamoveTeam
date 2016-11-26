@@ -1,5 +1,6 @@
 package com.kentdzai.ahamoveteam;
 
+import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,6 +9,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -20,9 +22,12 @@ import android.view.MenuItem;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
 
+import com.kentdzai.ahamoveteam.tab.TabCustomers;
 import com.kentdzai.ahamoveteam.tab.TabNewOrder;
 import com.kentdzai.ahamoveteam.tab.TabOrderList;
 import com.kentdzai.ahamoveteam.tab.TabProductList;
+
+import java.util.List;
 
 public class ManagerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -46,7 +51,9 @@ public class ManagerActivity extends AppCompatActivity
         navigationView.setCheckedItem(R.id.nav_newOrder);
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction().replace(R.id.main, new TabNewOrder()).commit();
+
     }
+
 
     @Override
     public void onBackPressed() {
@@ -89,6 +96,9 @@ public class ManagerActivity extends AppCompatActivity
             case R.id.nav_orderList:
                 fragment = new TabOrderList();
                 break;
+            case R.id.nav_customers:
+                fragment = new TabCustomers();
+                break;
             case R.id.nav_logout:
                 SharedPreferences preferences = getSharedPreferences("Login", MODE_PRIVATE);
                 SharedPreferences.Editor edit = preferences.edit();
@@ -103,6 +113,8 @@ public class ManagerActivity extends AppCompatActivity
 //            case R.id.nav_listid:
 //                fragment = new TabListID();
 //                break;
+
+
         }
         if (fragment != null) {
             FragmentManager manager = getSupportFragmentManager();
@@ -112,5 +124,19 @@ public class ManagerActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Intent it = getIntent();
+        MyLog.e("resume");
+//        if (it != null) {
+//            String s = it.getStringExtra("from");
+//            if (s.equals("EditCustomers")) {
+//                FragmentManager manager = getSupportFragmentManager();
+//                manager.beginTransaction().replace(R.id.main, new TabCustomers()).commit();
+//            }
+//        }
     }
 }

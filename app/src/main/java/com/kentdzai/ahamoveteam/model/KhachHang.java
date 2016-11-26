@@ -1,10 +1,12 @@
 package com.kentdzai.ahamoveteam.model;
 
+import java.io.Serializable;
+
 /**
  * Created by kentd on 23/11/2016.
  */
 
-public class KhachHang {
+public class KhachHang implements Serializable {
     int id;
     String name, phone, address;
 
