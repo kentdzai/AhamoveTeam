@@ -128,7 +128,7 @@ public class TabOrderList extends Fragment implements AdapterView.OnItemLongClic
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Mã Hóa Đơn " + arrH.get(position).getMaHoaDon());
         builder.setMessage("Chọn tác vụ");
-        builder.setNeutralButton("Xóa", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Xóa", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Ion.with(getContext())
@@ -144,12 +144,6 @@ public class TabOrderList extends Fragment implements AdapterView.OnItemLongClic
                         adapter.notifyDataSetChanged();
                     }
                 });
-            }
-        });
-        builder.setNegativeButton("Sửa", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
             }
         });
         builder.setPositiveButton("Hủy", null);
