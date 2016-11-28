@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
- import android.widget.Button;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -54,9 +54,11 @@ public class AdapterChiTiet extends ArrayAdapter<ChitietHoaDon> {
             @Override
             public void onClick(View v) {
                 int sl = Integer.parseInt(vh.tvDetailSoLuong.getText().toString());
-                sl++;
-                vh.tvDetailSoLuong.setText(String.valueOf(sl));
-                setSoLuong(position, sl);
+                if (sl < 10) {
+                    sl++;
+                    vh.tvDetailSoLuong.setText(String.valueOf(sl));
+                    setSoLuong(position, sl);
+                }
             }
         });
         vh.ivDetailMinus.setOnClickListener(new View.OnClickListener() {
