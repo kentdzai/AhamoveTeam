@@ -26,6 +26,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.kentdzai.ahamoveteam.AdapterChiTiet;
 import com.kentdzai.ahamoveteam.CheckNetwork;
+import com.kentdzai.ahamoveteam.ManagerActivity;
 import com.kentdzai.ahamoveteam.MyLog;
 import com.kentdzai.ahamoveteam.R;
 import com.kentdzai.ahamoveteam.model.ChitietHoaDon;
@@ -87,6 +88,8 @@ public class TabNewOrder extends Fragment implements View.OnClickListener, Adapt
 
         View v = inflater.inflate(R.layout.fragment_tab_new_order, container, false);
         db = new DatabaseSanPham(getContext());
+        ((ManagerActivity) getActivity())
+                .setActionBarTitle("Đơn Hàng Mới");
         init(v);
         return v;
     }
@@ -158,7 +161,7 @@ public class TabNewOrder extends Fragment implements View.OnClickListener, Adapt
 
     public void getKH() {
         Ion.with(getContext())
-                .load("http://192.168.1.102/php/aha/getkhachhang.php")
+                .load("http://kentdzai.tk/aha/getkhachhang.php")
                 .setBodyParameter("anhdeptrai", "kentdzai")
                 .asJsonArray()
                 .setCallback(new FutureCallback<JsonArray>() {
@@ -296,7 +299,7 @@ public class TabNewOrder extends Fragment implements View.OnClickListener, Adapt
 
 
                         Ion.with(getContext())
-                                .load("http://192.168.1.102/php/aha/neworder.php")
+                                .load("http://kentdzai.tk/aha/neworder.php")
                                 .setBodyParameter("tenKH", tenc)
                                 .setBodyParameter("sdtKH", sdtc)
                                 .setBodyParameter("diaChiKH", addressc)
@@ -315,7 +318,7 @@ public class TabNewOrder extends Fragment implements View.OnClickListener, Adapt
 
 
                                         Ion.with(getContext())
-                                                .load("http://192.168.1.102/php/aha/detailorder.php")
+                                                .load("http://kentdzai.tk/aha/detailorder.php")
                                                 .setBodyParameter("maHD", maHD)
                                                 .setBodyParameter("maSP", String.valueOf(maSP))
                                                 .setBodyParameter("soLuong", String.valueOf(soLuong))
@@ -372,7 +375,7 @@ public class TabNewOrder extends Fragment implements View.OnClickListener, Adapt
                 int tongtien = soLuong * gia;
                 Ion.with(getContext())
 //                        .load("http://kentdzai.tk/aha/pushdonhang.php")
-                        .load("http://192.168.1.102/php/aha/pushdonhang.php")
+                        .load("http://kentdzai.tk/aha/pushdonhang.php")
                         .setBodyParameter("tenKH", ten)
                         .setBodyParameter("sdtKH", sdt)
                         .setBodyParameter("diaChiKH", diaChi)

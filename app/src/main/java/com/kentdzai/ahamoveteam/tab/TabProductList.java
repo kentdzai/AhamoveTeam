@@ -16,6 +16,7 @@ import android.widget.Spinner;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.kentdzai.ahamoveteam.AdapterSanPham;
+import com.kentdzai.ahamoveteam.ManagerActivity;
 import com.kentdzai.ahamoveteam.MyLog;
 import com.kentdzai.ahamoveteam.R;
 import com.kentdzai.ahamoveteam.model.DatabaseSanPham;
@@ -57,6 +58,8 @@ public class TabProductList extends Fragment implements AdapterView.OnItemSelect
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_tab_product_list, container, false);
         server = getResources().getString(R.string.server);
+        ((ManagerActivity) getActivity())
+                .setActionBarTitle("Danh Sách Sản Phẩm");
         init(v);
         return v;
     }

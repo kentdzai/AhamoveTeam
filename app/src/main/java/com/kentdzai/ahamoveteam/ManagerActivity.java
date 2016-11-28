@@ -21,6 +21,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kentdzai.ahamoveteam.tab.TabCustomers;
 import com.kentdzai.ahamoveteam.tab.TabNewOrder;
@@ -33,6 +35,10 @@ public class ManagerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     BroadcastReceiver checkInternet;
+
+    TextView tvTenDangNhap, tvTenNhanVien;
+    SharedPreferences pref;
+    String tenNv, userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +58,15 @@ public class ManagerActivity extends AppCompatActivity
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction().replace(R.id.main, new TabNewOrder()).commit();
 
+        pref = getSharedPreferences("Login",MODE_PRIVATE);
+        userName = pref.getString("username","");
+        tenNv = pref.getString("tenNhanVien","");
+
+        View hView =  navigationView.inflateHeaderView(R.layout.nav_header_manager);
+        tvTenDangNhap = (TextView) hView.findViewById(R.id.tvTenDangNhap);
+        tvTenNhanVien = (TextView) hView.findViewById(R.id.tvTenNhanVien);
+        tvTenDangNhap.setText(userName);
+        tvTenNhanVien.setText(tenNv);
     }
 
 
@@ -124,6 +139,10 @@ public class ManagerActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void setActionBarTitle(String title) {
+        getSupportActionBar().setTitle(title);
     }
 
     @Override

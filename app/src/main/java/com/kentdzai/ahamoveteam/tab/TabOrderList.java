@@ -17,6 +17,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.kentdzai.ahamoveteam.AdapterDonHang;
 import com.kentdzai.ahamoveteam.AdapterSanPham;
+import com.kentdzai.ahamoveteam.ManagerActivity;
 import com.kentdzai.ahamoveteam.MyLog;
 import com.kentdzai.ahamoveteam.R;
 import com.kentdzai.ahamoveteam.model.DatabaseSanPham;
@@ -51,6 +52,8 @@ public class TabOrderList extends Fragment implements AdapterView.OnItemLongClic
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_tab_order_list, container, false);
         server = getResources().getString(R.string.server);
+        ((ManagerActivity) getActivity())
+                .setActionBarTitle("Danh Sách Đơn Hàng");
         init(v);
         return v;
     }

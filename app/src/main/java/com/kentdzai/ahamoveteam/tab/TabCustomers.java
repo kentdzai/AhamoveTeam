@@ -18,6 +18,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.kentdzai.ahamoveteam.AdapterCustomers;
 import com.kentdzai.ahamoveteam.EditCustomerActivity;
+import com.kentdzai.ahamoveteam.ManagerActivity;
 import com.kentdzai.ahamoveteam.MyLog;
 import com.kentdzai.ahamoveteam.R;
 import com.kentdzai.ahamoveteam.model.KhachHang;
@@ -45,6 +46,8 @@ public class TabCustomers extends Fragment implements AdapterView.OnItemLongClic
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_tab_customers, container, false);
         server = getResources().getString(R.string.server);
+        ((ManagerActivity) getActivity())
+                .setActionBarTitle("Danh Sách Khách Hàng");
         init(v);
         MyLog.e("create");
         return v;
