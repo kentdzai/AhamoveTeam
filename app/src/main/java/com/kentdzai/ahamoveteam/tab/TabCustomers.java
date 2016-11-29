@@ -50,6 +50,7 @@ public class TabCustomers extends Fragment implements AdapterView.OnItemLongClic
                 .setActionBarTitle("Danh Sách Khách Hàng");
         init(v);
         MyLog.e("create");
+        //ahihi
         return v;
     }
 
