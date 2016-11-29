@@ -1,7 +1,6 @@
 package com.kentdzai.ahamoveteam;
 
 import android.app.Activity;
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +39,8 @@ public class AdapterSanPham extends ArrayAdapter<SanPham> {
         tvTenSanPham.setText(s.getTenSanPham());
         tvGiaSanPham.setText(String.valueOf(s.getGiaSanPham()));
         tvMoTa.setText(s.getMoTa());
+        //ahihi
         return v;
+
     }
 }
