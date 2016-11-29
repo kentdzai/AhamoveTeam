@@ -40,6 +40,7 @@ public class AdapterSanPham extends ArrayAdapter<SanPham> {
         tvGiaSanPham.setText(String.valueOf(s.getGiaSanPham()));
         tvMoTa.setText(s.getMoTa());
         //ahihi
+        //a
         return v;
 
     }
